@@ -2,12 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<!-- 👇 这里已经改成 jammo223 -->
 <title>jammo223</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
-
+<!-- Futura 替代（系统优先，没有就用 Helvetica/Arial） -->
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 
@@ -17,7 +14,7 @@ body {
     color:#fff;
 }
 
-/* HERO */
+/* ===== HERO ===== */
 .hero {
     height:100vh;
     position:relative;
@@ -48,7 +45,7 @@ body {
     margin-top:10px;
 }
 
-/* NAV */
+/* ===== NAV ===== */
 .nav {
     position:fixed;
     top:20px;
@@ -69,40 +66,37 @@ body {
 
 .nav a.active { color:red; }
 
-/* SECTION */
+/* ===== SECTION ===== */
 .section {
     padding:120px 10%;
 }
 
-/* GRID */
-.grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-    gap:20px;
-}
-
-/* TYPEWRITER */
+/* ===== TYPEWRITER（只给文本用） ===== */
 .typewriter {
-    font-family: 'Special Elite', 'Courier New', monospace;
+    font-family: 'Courier New', monospace;
     letter-spacing:1px;
     line-height:1.8;
     color:#ddd;
 }
 
-/* ABOUT */
+/* ===== ABOUT ===== */
 .about {
     display:grid;
     grid-template-columns:1fr 2fr 2fr;
     gap:40px;
 }
 
-/* ROLE */
+/* ===== 🔥 ROLE（重点改这里） ===== */
 .role-all {
-    font-size:18px;
-    line-height:2;
+    font-family: "Futura", "Helvetica Neue", Arial, sans-serif;
+    font-size:22px;          /* 👈 放大一号 */
+    line-height:2.2;
+    color:red;               /* 👈 红色 */
+    font-weight:600;
+    letter-spacing:1px;
 }
 
-/* SCROLL */
+/* ===== SCROLL ===== */
 html {
     scroll-behavior:smooth;
 }
@@ -136,10 +130,12 @@ html {
 
 <!-- ABOUT -->
 <section class="section">
-<div class="about typewriter">
+<div class="about">
 
+<!-- ROLE（红色大字号 Futura） -->
 <div>
 <h3>Role</h3>
+
 <p class="role-all">
 Mutidisciplinary Artist<br>
 Audio-Visual Artist<br>
@@ -147,19 +143,22 @@ Audio-Visual Artist<br>
 Multimedia Director<br>
 Interactive Developer
 </p>
+
 </div>
 
-<div>
+<!-- 英文 -->
+<div class="typewriter">
 <h3>About</h3>
 <p>
-Jam Mo is a multidisciplinary artist whose practice focuses on CGI animation, programmable real-time visuals, sound art, and interactive installations...
+Jam Mo is a multidisciplinary artist whose practice focuses on CGI animation, programmable real-time visuals, sound art, and interactive installations. His work engages in multi-dimensional explorations of technology, the sense of the supernatural, and non-linear spatial narratives.
 </p>
 </div>
 
-<div>
+<!-- 中文 -->
+<div class="typewriter">
 <h3>关于</h3>
 <p>
-Jam Mo是一位多学科艺术创作者，其实践聚焦于CGI动画、可编程实时视觉、声音艺术与可交互装置之间的交叉融合...
+Jam Mo是一位多学科艺术创作者，其实践聚焦于CGI动画、可编程实时视觉、声音艺术与可交互装置之间的交叉融合，围绕科技与非线性空间展开探索。
 </p>
 </div>
 
