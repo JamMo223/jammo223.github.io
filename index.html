@@ -3,104 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <title>jammo</title>
+<link rel="stylesheet" href="style.css">
 
-<!-- Futura 替代（系统优先，没有就用 Helvetica/Arial） -->
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+/* ===== 额外结构优化 ===== */
 
-body {
-    font-family: Arial, sans-serif;
-    background:#000;
-    color:#fff;
+/* 顶部标题 */
+.main-title{
+    font-family: "Futura","Helvetica Neue",Arial,sans-serif;
+    font-size:64px;
+    font-weight:700;
+    letter-spacing:4px;
+    margin-bottom:60px;
 }
 
-/* ===== HERO ===== */
-.hero {
-    height:100vh;
-    position:relative;
-    overflow:hidden;
-}
-
-.hero video {
-    position:absolute;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    filter:brightness(0.4);
-}
-
-.hero-text {
-    position:absolute;
-    left:8%;
-    top:50%;
-    transform:translateY(-50%);
-}
-
-.hero-text h1 {
-    font-size:70px;
-}
-
-.hero-text p {
-    color:#aaa;
-    margin-top:10px;
-}
-
-/* ===== NAV ===== */
-.nav {
-    position:fixed;
-    top:20px;
-    left:50%;
-    transform:translateX(-50%);
-    display:flex;
-    gap:10px;
-    z-index:10;
-}
-
-.nav a {
-    padding:10px 16px;
-    border-radius:20px;
-    text-decoration:none;
-    background:linear-gradient(#555,#111);
-    color:#ccc;
-}
-
-.nav a.active { color:red; }
-
-/* ===== SECTION ===== */
-.section {
-    padding:120px 10%;
-}
-
-/* ===== TYPEWRITER（只给文本用） ===== */
-.typewriter {
-    font-family: 'Courier New', monospace;
-    letter-spacing:1px;
-    line-height:1.8;
-    color:#ddd;
-}
-
-/* ===== ABOUT ===== */
+/* 三列布局 */
 .about {
     display:grid;
     grid-template-columns:1fr 2fr 2fr;
     gap:40px;
 }
 
-/* ===== 🔥 ROLE（重点改这里） ===== */
+/* ROLE（红色） */
 .role-all {
-    font-family: "Futura", "Helvetica Neue", Arial, sans-serif;
-    font-size:22px;          /* 👈 放大一号 */
+    font-family: "Futura","Helvetica Neue",Arial,sans-serif;
+    font-size:22px;
+    color:red;
     line-height:2.2;
-    color:red;               /* 👈 红色 */
-    font-weight:600;
-    letter-spacing:1px;
 }
 
-/* ===== SCROLL ===== */
-html {
-    scroll-behavior:smooth;
+/* 打字机 */
+.typewriter {
+    font-family:'Courier New', monospace;
+    line-height:1.8;
+    letter-spacing:1px;
+    color:#ddd;
 }
 </style>
+
 </head>
 
 <body>
@@ -118,22 +58,16 @@ html {
 <a href="contact.html">Contact</a>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-<video autoplay muted loop src="hero.mp4"></video>
+<div class="section">
 
-<div class="hero-text">
-<h1>JAM MO</h1>
+<!-- 🔥 顶部标题（已改为 JAM MO） -->
+<h1 class="main-title">JAM MO</h1>
 
-</div>
-</section>
-
-<!-- ABOUT -->
-<section class="section">
 <div class="about">
 
-<!-- ROLE（红色大字号 Futura） -->
+<!-- 左列：Role -->
 <div>
+
 <h3>Role</h3>
 
 <p class="role-all">
@@ -146,35 +80,35 @@ Interactive Developer
 
 </div>
 
-<!-- 英文 -->
-<div class="typewriter">
+<!-- 中列：英文（Role 已在它上面） -->
+<div>
+
 <h3>About</h3>
-<p>
+
+<p class="typewriter">
 Jam Mo is a multidisciplinary artist whose practice focuses on the intersection of CGI animation, programmable real-time visuals, sound art, and interactive installations. His work engages in multi-dimensional explorations of technology, the sense of the supernatural, and non-linear spatial narratives. Grounded in a conceptual framework of computational perception and perceptual space, his practice operates within intertwined artistic, musical, and technological contexts to investigate how multiple modes of perception produce experiences of temporal and spatial dislocation.
 His works are primarily realized across concert stages, music festival stages, university-based cultural and art laboratories, theatrical spaces, and museum environments.
 </p>
+
 </div>
 
-<!-- 中文 -->
-<div class="typewriter">
+<!-- 右列：中文 -->
+<div>
+
 <h3>关于</h3>
-<p>
+
+<p class="typewriter">
 Jam Mo是一位多学科艺术创作者，其实践聚焦于CGI动画、可编程实时视觉、声音艺术与可交互装置之间的交叉融合。创作普遍围绕科技、超自然感与非线性空间叙事展开多维度探索，常以“计算感知”与“知觉空间”的概念体系为核心路径，试图通过跨学科与跨文化的实践方式，探讨多元感知如何在文化与艺术语境中生成时间与空间的错位体验。
-作品实践主要在演唱会舞台、音乐节舞台、高校文化与艺术实验室、戏剧空间以及美术馆等场景。。
+作品实践主要在演唱会舞台、音乐节舞台、高校文化与艺术实验室、戏剧空间以及美术馆等场景。
 </p>
+
 </div>
 
 </div>
-</section>
 
-<script>
-const links = document.querySelectorAll(".nav a");
-links.forEach(link => {
-    if(link.href === window.location.href){
-        link.classList.add("active");
-    }
-});
-</script>
+</div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
