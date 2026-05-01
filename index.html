@@ -2,45 +2,43 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>jammo</title>
-<link rel="stylesheet" href="style.css">
+<title>jammo223</title>
 
 <style>
-/* ===== 额外结构优化 ===== */
-
-/* 顶部标题 */
-.main-title{
-    font-family: "Futura","Helvetica Neue",Arial,sans-serif;
-    font-size:64px;
-    font-weight:700;
-    letter-spacing:4px;
-    margin-bottom:60px;
+body {
+    margin:0;
+    background:#000;   /* 👈 黑色背景 */
+    color:#fff;
+    font-family: Arial, sans-serif;
 }
 
-/* 三列布局 */
-.about {
-    display:grid;
-    grid-template-columns:1fr 2fr 2fr;
-    gap:40px;
+/* ===== NAV ===== */
+.nav {
+    display:flex;
+    justify-content:center;
+    gap:40px;  /* 👈 类目间隔 ≈ 5字符 */
+    padding:30px 0;
 }
 
-/* ROLE（红色） */
-.role-all {
-    font-family: "Futura","Helvetica Neue",Arial,sans-serif;
-    font-size:22px;
+/* 所有链接统一样式 */
+.nav a {
+    text-decoration:none;
+    color:#aaa;   /* 👈 统一灰色 */
+    font-size:18px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+/* hover 效果 */
+.nav a:hover {
     color:red;
-    line-height:2.2;
 }
 
-/* 打字机 */
-.typewriter {
-    font-family:'Courier New', monospace;
-    line-height:1.8;
-    letter-spacing:1px;
-    color:#ddd;
+/* 当前页面高亮 */
+.nav a.active {
+    color:red;
 }
 </style>
-
 </head>
 
 <body>
@@ -58,57 +56,14 @@
 <a href="contact.html">Contact</a>
 </div>
 
-<div class="section">
-
-<!-- 🔥 顶部标题（已改为 JAM MO） -->
-<h1 class="main-title">JAM MO</h1>
-
-<div class="about">
-
-<!-- 左列：Role -->
-<div>
-
-<h3>Role</h3>
-
-<p class="role-all">
-Mutidisciplinary Artist<br>
-Audio-Visual Artist<br>
-3D Artist<br>
-Multimedia Director<br>
-Interactive Developer
-</p>
-
-</div>
-
-<!-- 中列：英文（Role 已在它上面） -->
-<div>
-
-<h3>About</h3>
-
-<p class="typewriter">
-Jam Mo is a multidisciplinary artist whose practice focuses on the intersection of CGI animation, programmable real-time visuals, sound art, and interactive installations. His work engages in multi-dimensional explorations of technology, the sense of the supernatural, and non-linear spatial narratives. Grounded in a conceptual framework of computational perception and perceptual space, his practice operates within intertwined artistic, musical, and technological contexts to investigate how multiple modes of perception produce experiences of temporal and spatial dislocation.
-His works are primarily realized across concert stages, music festival stages, university-based cultural and art laboratories, theatrical spaces, and museum environments.
-</p>
-
-</div>
-
-<!-- 右列：中文 -->
-<div>
-
-<h3>关于</h3>
-
-<p class="typewriter">
-Jam Mo是一位多学科艺术创作者，其实践聚焦于CGI动画、可编程实时视觉、声音艺术与可交互装置之间的交叉融合。创作普遍围绕科技、超自然感与非线性空间叙事展开多维度探索，常以“计算感知”与“知觉空间”的概念体系为核心路径，试图通过跨学科与跨文化的实践方式，探讨多元感知如何在文化与艺术语境中生成时间与空间的错位体验。
-作品实践主要在演唱会舞台、音乐节舞台、高校文化与艺术实验室、戏剧空间以及美术馆等场景。
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<script src="script.js"></script>
+<script>
+const links = document.querySelectorAll(".nav a");
+links.forEach(link=>{
+    if(link.href === window.location.href){
+        link.classList.add("active");
+    }
+});
+</script>
 
 </body>
 </html>
