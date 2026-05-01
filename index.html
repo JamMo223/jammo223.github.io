@@ -25,6 +25,7 @@ color:#aaa;
 text-decoration:none;
 font-weight:bold;
 cursor:pointer;
+transition:.3s;
 }
 
 .nav a:hover,
@@ -40,14 +41,20 @@ font-size:64px;
 margin:40px 0 80px;
 }
 
-/* 页面 */
+/* 页面切换（顺滑） */
 .page{
-display:none;
+opacity:0;
+pointer-events:none;
+position:absolute;
+width:100%;
 padding:0 10% 100px;
+transition:opacity .4s ease;
 }
 
 .page.active{
-display:block;
+opacity:1;
+pointer-events:auto;
+position:relative;
 }
 
 /* ABOUT */
@@ -77,14 +84,49 @@ grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
 gap:30px;
 }
 
+/* 卡片 */
 .card{
-height:200px;
+position:relative;
+height:220px;
 background:#111;
 border:1px solid #333;
-display:flex;
-align-items:center;
-justify-content:center;
+overflow:hidden;
+cursor:pointer;
+transition:.3s;
+}
+
+.card:hover{
+border-color:red;
+}
+
+/* 视频 */
+.card video{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:0;
+transition:.4s;
+}
+
+/* hover显示视频 */
+.card:hover video{
+opacity:1;
+}
+
+/* 默认文字 */
+.card span{
+position:absolute;
+z-index:2;
 color:#666;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+transition:.3s;
+}
+
+.card:hover span{
+opacity:0;
 }
 </style>
 </head>
@@ -93,15 +135,15 @@ color:#666;
 
 <!-- NAV -->
 <div class="nav">
-<a onclick="showPage('about')" class="active">About</a>
-<a onclick="showPage('Featured Project')">Featured Project</a>
-<a onclick="showPage('video')">Video</a>
-<a onclick="showPage('visual')">Visual</a>
-<a onclick="showPage('cgi')">CGI</a>
-<a onclick="showPage('installation')">Installation</a>
-<a onclick="showPage('sound')">Sound</a>
-<a onclick="showPage('lab')">Lab</a>
-<a onclick="showPage('contact')">Contact</a>
+<a onclick="showPage('about', this)" class="active">About</a>
+<a onclick="showPage('FeaturedProject', this)">Featured Project</a>
+<a onclick="showPage('video', this)">Video</a>
+<a onclick="showPage('visual', this)">Visual</a>
+<a onclick="showPage('cgi', this)">CGI</a>
+<a onclick="showPage('installation', this)">Installation</a>
+<a onclick="showPage('sound', this)">Sound</a>
+<a onclick="showPage('lab', this)">Lab</a>
+<a onclick="showPage('contact', this)">Contact</a>
 </div>
 
 <h1 class="main-title">JAM MO</h1>
@@ -124,16 +166,14 @@ Interactive Developer
 <div>
 <h3>About</h3>
 <p class="typewriter">
-Jam Mo is a multidisciplinary artist whose practice focuses on the intersection of CGI animation, programmable real-time visuals, sound art, and interactive installations. His work engages in multi-dimensional explorations of technology, the sense of the supernatural, and non-linear spatial narratives. Grounded in a conceptual framework of computational perception and perceptual space, his practice operates within intertwined artistic, musical, and technological contexts to investigate how multiple modes of perception produce experiences of temporal and spatial dislocation.
-His works are primarily realized across concert stages, music festival stages, university-based cultural and art laboratories, theatrical spaces, and museum environments.
+Jam Mo is a multidisciplinary artist whose practice focuses on the intersection of CGI animation, programmable real-time visuals, sound art, and interactive installations...
 </p>
 </div>
 
 <div>
 <h3>关于</h3>
 <p class="typewriter">
-Jam Mo是一位多学科艺术创作者，其实践聚焦于CGI动画、可编程实时视觉、声音艺术与可交互装置之间的交叉融合。创作普遍围绕科技、超自然感与非线性空间叙事展开多维度探索，常以“计算感知”与“知觉空间”的概念体系为核心路径，试图通过跨学科与跨文化的实践方式，探讨多元感知如何在文化与艺术语境中生成时间与空间的错位体验。
-作品实践主要在演唱会舞台、音乐节舞台、高校文化与艺术实验室、戏剧空间以及美术馆等场景。
+Jam Mo是一位多学科艺术创作者，其实践聚焦于CGI动画、可编程实时视觉、声音艺术与可交互装置之间的交叉融合...
 </p>
 </div>
 
@@ -141,64 +181,82 @@ Jam Mo是一位多学科艺术创作者，其实践聚焦于CGI动画、可编�
 </div>
 
 <!-- FEATURED -->
-<div id="Featured Project" class="page">
+<div id="FeaturedProject" class="page">
 <h2>Featured Project</h2>
+
 <div class="grid">
-<div class="card">Featured Project</div>
-<div class="card">Featured Project</div>
+
+<div class="card">
+<span>Project 01</span>
+<video src="video/v1.mp4" muted loop></video>
+</div>
+
+<div class="card">
+<span>Project 02</span>
+<video src="video/v2.mp4" muted loop></video>
+</div>
+
 </div>
 </div>
 
 <!-- VIDEO -->
 <div id="video" class="page">
 <h2>All Video</h2>
-<div class="grid"><div class="card">Video</div></div>
+<div class="grid">
+
+<div class="card">
+<span>Video</span>
+<video src="video/v1.mp4" muted loop></video>
 </div>
 
-<!-- VISUAL -->
-<div id="visual" class="page">
-<h2>Visual</h2>
-<div class="grid"><div class="card">Visual</div></div>
+</div>
 </div>
 
-<!-- CGI -->
-<div id="cgi" class="page">
-<h2>CGI</h2>
-<div class="grid"><div class="card">CGI</div></div>
-</div>
+<!-- 其他页面 -->
+<div id="visual" class="page"><h2>Visual</h2></div>
+<div id="cgi" class="page"><h2>CGI</h2></div>
+<div id="installation" class="page"><h2>Installation</h2></div>
+<div id="sound" class="page"><h2>Sound</h2></div>
+<div id="lab" class="page"><h2>Lab</h2></div>
 
-<!-- LIVE/INSTALLATION -->
-<div id="installation" class="page">
-<h2>Installation</h2>
-<div class="grid"><div class="card">Installation</div></div>
-</div>
-
-<!-- SOUND -->
-<div id="sound" class="page">
-<h2>Sound</h2>
-<div class="grid"><div class="card">Sound</div></div>
-</div>
-
-<!-- LAB -->
-<div id="lab" class="page">
-<h2>Lab</h2>
-<div class="grid"><div class="card">Lab</div></div>
-</div>
-
-<!-- CONTACT -->
 <div id="contact" class="page">
 <h2>Contact</h2>
 <p>Email: jam.mo.404lab@gmail.com</p>
 </div>
 
 <script>
-function showPage(id){
-document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'))
+function showPage(id, el){
+
+document.querySelectorAll('.page').forEach(p=>{
+p.classList.remove('active')
+})
+
 document.getElementById(id).classList.add('active')
 
-document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'))
-event.target.classList.add('active')
+document.querySelectorAll('.nav a').forEach(a=>{
+a.classList.remove('active')
+})
+
+el.classList.add('active')
 }
+
+/* hover自动播放 */
+document.querySelectorAll('.card').forEach(card=>{
+let video = card.querySelector('video')
+
+card.addEventListener('mouseenter', ()=>{
+if(video){
+video.play()
+}
+})
+
+card.addEventListener('mouseleave', ()=>{
+if(video){
+video.pause()
+video.currentTime = 0
+}
+})
+})
 </script>
 
 </body>
