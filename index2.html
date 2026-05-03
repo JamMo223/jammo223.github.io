@@ -2,170 +2,135 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>jammo</title>
+<title>Jam404 Art</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
 
 <style>
-body{
-margin:0;
-background:#000;
-color:#fff;
-font-family:Arial;
-overflow-x:hidden;
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: Arial, sans-serif;
+    background:#000;
+    color:#fff;
 }
 
-/* NAV */
-.nav{
-display:flex;
-justify-content:center;
-gap:40px;
-padding:30px 0;
+/* ===== HERO ===== */
+.hero {
+    height:100vh;
+    position:relative;
+    overflow:hidden;
 }
 
-.nav a{
-color:#aaa;
-text-decoration:none;
-font-weight:bold;
-cursor:pointer;
-transition:.3s;
+.hero video {
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:brightness(0.4);
 }
 
-.nav a:hover,
-.nav a.active{
-color:red;
+.hero-text {
+    position:absolute;
+    left:8%;
+    top:50%;
+    transform:translateY(-50%);
 }
 
-/* 标题 */
-.main-title{
-text-align:center;
-font-family:Futura,Arial;
-font-size:64px;
-margin:40px 0 80px;
+.hero-text h1 {
+    font-size:70px;
 }
 
-/* 页面 */
-.page{
-display:none;
-opacity:0;
-padding:0 10% 100px;
-transition:0.3s;
+.hero-text p {
+    color:#aaa;
+    margin-top:10px;
 }
 
-.page.active{
-display:block;
-opacity:1;
+/* ===== NAV ===== */
+.nav {
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:10px;
+    z-index:10;
 }
 
-/* ABOUT */
-.about{
-display:grid;
-grid-template-columns:1fr 2fr 2fr;
-gap:40px;
+.nav button {
+    padding:10px 16px;
+    border:none;
+    border-radius:20px;
+    background:linear-gradient(#555,#111);
+    color:#ccc;
+    cursor:pointer;
 }
 
-.role-all{
-font-family:Futura,Arial;
-font-size:22px;
-color:red;
-line-height:2.2;
+.nav button:hover { color:white; }
+
+/* ===== SECTION ===== */
+.section {
+    padding:120px 10%;
 }
 
-.typewriter{
-font-family:"Courier New",monospace;
-color:#ddd;
-line-height:1.8;
+/* ===== GRID ===== */
+.grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:20px;
 }
 
-/* GRID */
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-gap:30px;
+.card {
+    overflow:hidden;
+    border-radius:10px;
 }
 
-/* 卡片 */
-.card{
-position:relative;
-height:200px;
-background:#111;
-border:1px solid #333;
-overflow:hidden;
-cursor:pointer;
+.card img, .card video {
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    transition:0.4s;
 }
 
-/* 视频 */
-.card video{
-width:100%;
-height:100%;
-object-fit:cover;
-opacity:0;
-transition:0.3s;
+.card:hover img { transform:scale(1.1); }
+
+/* ===== TYPEWRITER ===== */
+.typewriter {
+    font-family: 'Special Elite', 'Courier New', monospace;
+    letter-spacing: 1px;
+    line-height: 1.8;
+    color:#ddd;
 }
 
-/* hover */
-.card:hover video{
-opacity:1;
+/* 光标闪烁 */
+.typewriter::after {
+    content:"_";
+    animation: blink 1s infinite;
 }
 
-/* 文本 */
-.card span{
-position:absolute;
-color:#666;
-left:50%;
-top:50%;
-transform:translate(-50%,-50%);
-transition:.3s;
+@keyframes blink {
+    0%,50%,100% {opacity:1;}
+    25%,75% {opacity:0;}
 }
 
-.card:hover span{
-opacity:0;
+/* ===== ABOUT ===== */
+.about {
+    display:grid;
+    grid-template-columns:1fr 2fr 2fr;
+    gap:40px;
 }
 
-.card:hover{
-border-color:red;
+/* ===== ROLE（统一字号）===== */
+.role-all {
+    font-size:18px;
+    line-height:2;
+    letter-spacing:1px;
 }
 
-/* ===== 全屏作品页 ===== */
-.overlay{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:#000;
-z-index:999;
+/* ===== SCROLL ===== */
+html {
+    scroll-behavior:smooth;
 }
-
-/* 视频 */
-.overlay video{
-width:100%;
-height:100%;
-object-fit:contain;
-}
-
-/* 信息层 */
-.overlay-info{
-position:absolute;
-bottom:40px;
-left:40px;
-color:#fff;
-max-width:500px;
-}
-
-.overlay-info h2{
-margin-bottom:10px;
-}
-
-/* 关闭按钮 */
-.close{
-position:absolute;
-top:30px;
-right:40px;
-font-size:20px;
-cursor:pointer;
-color:#aaa;
-}
-.close:hover{color:red;}
 </style>
 </head>
 
@@ -173,18 +138,34 @@ color:#aaa;
 
 <!-- NAV -->
 <div class="nav">
-<a onclick="showPage('about', this)" class="active">About</a>
-<a onclick="showPage('featured', this)">FeaturedProject</a>
+<button onclick="go('about')">About</button>
+<button onclick="go('featured')">Featured</button>
+<button onclick="go('video')">Video</button>
+<button onclick="go('visual')">Visual</button>
+<button onclick="go('cgi')">CGI</button>
+<button onclick="go('live')">Live</button>
+<button onclick="go('sound')">Sound</button>
+<button onclick="go('lab')">Lab</button>
+<button onclick="go('contact')">Contact</button>
 </div>
 
-<h1 class="main-title">JAM MO</h1>
+<!-- HERO -->
+<section class="hero">
+<video autoplay muted loop src="hero.mp4"></video>
+
+<div class="hero-text">
+<h1>Jam Mo</h1>
+<p>Multidisciplinary Artist / Audio Visual / Interactive</p>
+</div>
+</section>
 
 <!-- ABOUT -->
-<div id="about" class="page active">
-<div class="about">
+<section id="about" class="section">
+<div class="about typewriter">
 
 <div>
 <h3>Role</h3>
+
 <p class="role-all">
 Mutidisciplinary Artist<br>
 Audio-Visual Artist<br>
@@ -192,93 +173,61 @@ Audio-Visual Artist<br>
 Multimedia Director<br>
 Interactive Developer
 </p>
+
 </div>
 
 <div>
 <h3>About</h3>
-<p class="typewriter">
-Jam Mo is a multidisciplinary artist...
+<p>
+Jam Mo is a multidisciplinary artist whose practice focuses on the intersection of CGI animation, programmable real-time visuals, sound art, and interactive installations. His work engages in multi-dimensional explorations of technology, the sense of the supernatural, and non-linear spatial narratives. Grounded in a conceptual framework of computational perception and perceptual space, his practice operates within intertwined artistic, musical, and technological contexts to investigate how multiple modes of perception produce experiences of temporal and spatial dislocation.
+His works are primarily realized across concert stages, music festival stages, university-based cultural and art laboratories, theatrical spaces, and museum environments.
 </p>
 </div>
 
 <div>
 <h3>关于</h3>
-<p class="typewriter">
-Jam Mo是一位多学科艺术创作者...
+<p>
+Jam Mo是一位多学科艺术创作者，其实践聚焦于CGI动画、可编程实时视觉、声音艺术与可交互装置之间的交叉融合。创作普遍围绕科技、超自然感与非线性空间叙事展开多维度探索，常以“计算感知”与“知觉空间”的概念体系为核心路径，试图通过跨学科与跨文化的实践方式，探讨多元感知如何在文化与艺术语境中生成时间与空间的错位体验。
+作品实践主要在演唱会舞台、音乐节舞台、高校文化与艺术实验室、戏剧空间以及美术馆等场景。
 </p>
 </div>
 
 </div>
-</div>
+</section>
 
 <!-- FEATURED -->
-<div id="featured" class="page">
-<h2>FeaturedProject</h2>
-
+<section id="featured" class="section">
+<h2>Featured Project</h2>
 <div class="grid">
 
-<div class="card"
-onclick="openProject('video1.mp4','Project 01','Realtime Visual','Sound + Code')"
-onmouseenter="this.querySelector('video').play()"
-onmouseleave="this.querySelector('video').pause()">
-
-<video src="video1.mp4" muted loop></video>
-<span>Project 01</span>
-
+<div class="card">
+<video autoplay muted loop src="project1.mp4"></video>
 </div>
 
-<div class="card"
-onclick="openProject('video2.mp4','Project 02','CGI Work','Audio + Visual')"
-onmouseenter="this.querySelector('video').play()"
-onmouseleave="this.querySelector('video').pause()">
-
-<video src="video2.mp4" muted loop></video>
-<span>Project 02</span>
-
+<div class="card">
+<img src="img1.jpg">
 </div>
 
 </div>
-</div>
+</section>
 
-<!-- ===== 全屏层 ===== -->
-<div id="overlay" class="overlay">
+<!-- 分类 -->
+<section id="video" class="section"><h2>All Video</h2></section>
+<section id="visual" class="section"><h2>Visual</h2></section>
+<section id="cgi" class="section"><h2>CGI</h2></section>
+<section id="live" class="section"><h2>Live / Installation</h2></section>
+<section id="sound" class="section"><h2>Sound</h2></section>
+<section id="lab" class="section"><h2>Lab</h2></section>
 
-<div class="close" onclick="closeProject()">CLOSE</div>
-
-<video id="overlayVideo" controls autoplay></video>
-
-<div class="overlay-info">
-<h2 id="title"></h2>
-<p id="desc"></p>
-<p id="credits"></p>
-</div>
-
-</div>
+<!-- CONTACT -->
+<section id="contact" class="section">
+<h2>Contact</h2>
+<p>Email: your@email.com</p>
+</section>
 
 <script>
-function showPage(id, el){
-document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'))
-document.getElementById(id).classList.add('active')
-
-document.querySelectorAll('.nav a').forEach(a=>a.classList.remove('active'))
-el.classList.add('active')
-}
-
-function openProject(video,title,desc,credits){
-document.getElementById('overlay').style.display='block'
-
-let v = document.getElementById('overlayVideo')
-v.src = video
-v.play()
-
-document.getElementById('title').innerText = title
-document.getElementById('desc').innerText = desc
-document.getElementById('credits').innerText = credits
-}
-
-function closeProject(){
-document.getElementById('overlay').style.display='none'
-document.getElementById('overlayVideo').pause()
+function go(id){
+    document.getElementById(id).scrollIntoView();
 }
 </script>
 
